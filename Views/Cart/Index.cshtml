@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-striped">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Quanity</th>
+    <th>Total</th>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td>@item.Product.ProductId</td>
+                <td>@item.Product.ProductName</td>
+                <td>@item.Product.Price</td>
+                <td>@item.Quantity</td>
+                <td><span style="font-weight:bold;">@(item.Product.Price * item.Quantity)</span></td>
+                <td><a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Product.ProductId" class="btn btn-outline-danger">REMOVE</a></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5"><span style="fonr-weight:bold;">Total Amount</span></td>
+            <td><span style="font-weight:bold;">@ViewBag.total</span></td>
+        </tr>
+    </tfoot>
+</table>
+<div>
+    <span><a asp-controller="Products" asp-action="ProductView" class="btn btn-primary">Continue Shopping</a> | <a class="btn btn-primary" asp-controller="Checkout" asp-action="Index">Checkout</a></span>
+</div>
